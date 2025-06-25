@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env
 load_dotenv()
 
-# Retrieve email credentials securely
+# Retrieve email credentials
 SMTP_SERVER = os.getenv("SMTP_SERVER")
 SMTP_PORT = int(os.getenv("SMTP_PORT"))
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
@@ -45,7 +45,7 @@ def send_email_alert(stock, price, percentage):
     
     try:
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()  # Secure the connection
+            server.starttls() 
             server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             text = message.as_string()
             server.sendmail(EMAIL_ADDRESS, MY_EMAIL_ADDRESS, text)
@@ -90,5 +90,5 @@ try:
         schedule.run_pending()  
         time.sleep(1) 
 except KeyboardInterrupt:
-    print("Program interrupted by user. Exiting gracefully.")  
+    print("Program interrupted by user. Exiting.")  
 
